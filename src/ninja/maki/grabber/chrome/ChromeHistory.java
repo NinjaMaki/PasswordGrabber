@@ -1,4 +1,4 @@
-package ninja.maki.grabber;
+package ninja.maki.grabber.chrome;
 
 import com.sun.jna.platform.win32.Crypt32Util;
 import ninja.maki.utils.SystemUtil;
