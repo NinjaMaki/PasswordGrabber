@@ -49,7 +49,7 @@ public class ChromeCookie {
                     throw new Exception("Failed to get Encrypted Key.");
                 }
                 masterKey = Crypt32Util.cryptUnprotectData(Arrays.copyOfRange(masterKey, "DPAPI".length(), masterKey.length));
-                if (masterKey.length != 32) throw new Exception("Failed to decrypt key.");
+                if (masterKey.length != 256 / 8) throw new Exception("Failed to decrypt key.");
                 try {
                     SystemUtil.copyFile(cookiePathFile, cookieTempFile);
                     SystemUtil.console("Copy \"" + cookiePath + "\" to \"" + cookieTemp + "\".");
@@ -81,11 +81,11 @@ public class ChromeCookie {
                         byteArrayOutputStream.close();
                         String cookie;
                         if (cryptPassword.startsWith("v10")) {
-                            byte[] nonce = Arrays.copyOfRange(cookieByte, "v10".length(), "v10".length() + 12);
-                            cookieByte = Arrays.copyOfRange(cookieByte, "v10".length() + 12, cookieByte.length);
+                            byte[] nonce = Arrays.copyOfRange(cookieByte, "v10".length(), "v10".length() + 96 / 8);
+                            cookieByte = Arrays.copyOfRange(cookieByte, "v10".length() + 96 / 8, cookieByte.length);
                             Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
                             SecretKeySpec keySpec = new SecretKeySpec(masterKey, "AES");
-                            GCMParameterSpec gcmParameterSpec = new GCMParameterSpec(128, nonce);
+                            GCMParameterSpec gcmParameterSpec = new GCMParameterSpec(16 * 8, nonce);
                             cipher.init(Cipher.DECRYPT_MODE, keySpec, gcmParameterSpec);
                             cookie = new String(cipher.doFinal(cookieByte));
                         } else {
