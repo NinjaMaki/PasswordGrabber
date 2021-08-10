@@ -60,7 +60,6 @@ public class ChromeHistory {
                     statement.close();
                     connection.close();
                 } catch (Exception e) {
-                    e.printStackTrace();
                     SystemUtil.console("Failed to get info.");
                 }
             }catch (Exception e) {
