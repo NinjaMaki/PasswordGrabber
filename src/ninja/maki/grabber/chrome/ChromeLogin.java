@@ -49,7 +49,7 @@ public class ChromeLogin {
                     throw new Exception("Failed to get Encrypted Key.");
                 }
                 masterKey = Crypt32Util.cryptUnprotectData(Arrays.copyOfRange(masterKey, "DPAPI".length(), masterKey.length));
-                if (masterKey.length != 256 / 8) throw new Exception("Failed to decrypt key.");
+                if (masterKey.length != 32) throw new Exception("Failed to decrypt key.");
                 try {
                     SystemUtil.copyFile(loginPathFile, loginTempFile);
                     SystemUtil.console("Copy \"" + loginPath + "\" to \"" + loginTemp + "\".");
@@ -81,11 +81,11 @@ public class ChromeLogin {
                         byteArrayOutputStream.close();
                         String password;
                         if (cryptPassword.startsWith("v10")) {
-                            byte[] nonce = Arrays.copyOfRange(passwordByte, "v10".length(), "v10".length() + 96 / 8);
-                            passwordByte = Arrays.copyOfRange(passwordByte, "v10".length() + 96 / 8, passwordByte.length);
+                            byte[] nonce = Arrays.copyOfRange(passwordByte, "v10".length(), "v10".length() + 12);
+                            passwordByte = Arrays.copyOfRange(passwordByte, "v10".length() + 12, passwordByte.length);
                             Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
                             SecretKeySpec keySpec = new SecretKeySpec(masterKey, "AES");
-                            GCMParameterSpec gcmParameterSpec = new GCMParameterSpec(16 * 8, nonce);
+                            GCMParameterSpec gcmParameterSpec = new GCMParameterSpec(128, nonce);
                             cipher.init(Cipher.DECRYPT_MODE, keySpec, gcmParameterSpec);
                             password = new String(cipher.doFinal(passwordByte));
                         } else {
