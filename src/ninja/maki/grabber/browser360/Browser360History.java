@@ -1,4 +1,4 @@
-package ninja.maki.grabber.broswer360;
+package ninja.maki.grabber.browser360;
 
 import ninja.maki.utils.SystemUtil;
 
